@@ -4,8 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "babel src --out-dir dist",
+    "start": "npm run build && node dist/server.js",
+    "start:dev": "babel-node src/server.js",
+    "test:integration": "SET NODE_ENV=test && mocha --opts test/integration/mocha.opts test/integration/**/*_spec.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "João Teodoro <joaotdn@gmail.com> (https://github.com/joaotdn/)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
 }
