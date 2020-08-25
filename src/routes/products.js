@@ -1,14 +1,9 @@
-const router = express.Router()
 import express from 'express'
+import ProductsController from '../controllers/products'
+import Product from '../models/products'
 
-router.get('/', (req, res) => {
-  res.send([
-    {
-      name: 'Default Product',
-      description: 'product description',
-      price: 100
-    }
-  ])
-})
+const router = express.Router()
+const productsController = new ProductsController(Product)
+router.get('/', (req, res) => productsController.get(req, res))
 
 export default router

@@ -4,11 +4,23 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import routes from './routes'
+import database from './config/database'
 
 const app = express()
-app.use(bodyParser.json())
-// all requests management with routes
-app.use('/', routes)
+
+const configureExpress = () => {
+  app.use(bodyParser.json())
+  // all requests management with routes
+  app.use('/', routes)
+  app.database = database
+
+  return app
+}
 
 // export app like a module
-module.exports = app
+export default async () => {
+  const app = configureExpress()
+  await app.database.connect()
+
+  return app
+}
